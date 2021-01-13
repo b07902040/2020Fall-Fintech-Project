@@ -62,7 +62,7 @@ class Strategy():
         #Log('RSI12=' + str(RSI12))
         # buying : RSI 6和RSI 12同在50下方且一起上涨时，RSI 6向上突破RSI 12。
         if (RSI6 < 50) and (RSI12 < 50) and (self.last_RSI12 > self.last_RSI6) and (RSI6 > RSI12) and (self.last_RSI6 < RSI6) and (self.last_RSI12 < RSI12):
-            if self['assets'][exchange]['USDT'] >= 4*self.multi*close_price:
+            if self['assets'][exchange]['USDT'] >= 4*self.multi*close_price && self['assets'][exchange]['USDT'] >= 10000:
                 self.first_exchange = 1
                 return [
                     {
@@ -87,7 +87,7 @@ class Strategy():
             ]
         # buying
         elif (RSI6 < self.low_buy_point) and (self.last_RSI6_status >= 2) :
-            if self['assets'][exchange]['USDT'] >= 1*self.multi*close_price:
+            if self['assets'][exchange]['USDT'] >= 1*self.multi*close_price && self['assets'][exchange]['USDT'] >= 10000:
                 self.last_RSI6_status = 1
                 self.first_exchange = 1
                 #Log('bying' + exchange + ':' + pair + 'in RSI6=' + str(RSI6))
@@ -104,7 +104,7 @@ class Strategy():
                 return []
         
         elif (RSI6 > self.low_buy_point) and (self.last_RSI6_status == 1) :
-            if self['assets'][exchange]['USDT'] >= 2*self.multi*close_price:
+            if self['assets'][exchange]['USDT'] >= 2*self.multi*close_price && self['assets'][exchange]['USDT'] >= 10000:
                 self.last_RSI6_status = 2
                 self.first_exchange = 1
                 #Log('bying' + exchange + ':' + pair + 'in RSI6=' + str(RSI6))
